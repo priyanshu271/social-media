@@ -2,17 +2,34 @@
     <h1>
      {{title}}
     </h1>
-    <form [formGroup]="angForm" novalidate>
+    <form [formGroup]="angForm">
           <div class="mb-3">
             <label class="form-label">Name:
               <input class="form-control" formControlName="name">
             </label>
           </div>
           <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
-              <div *ngIf="angForm.controls['name'].errors.required">
+              <span *ngIf="angForm.controls['name'].errors.required">
               Name is required.
-            </div>
+              </span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password:
+              <input type="password" class="form-control" formControlName="password">
+            </label>
+          </div>
+          <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="alert alert-danger">
+              <span>
+              Password is required.
+              </span>
+              <div *ngIf="angForm.controls['password'].errors.minlength">
+                <span>
+                  Password must be at least 8 characters long.
+                </span>
+              </div>
           </div>
           <button type="submit" class="btn btn-primary">Login</button>
+          <div>Don't have an account? Sign Up!</div>
+          <button class="btn btn-primary" (click)="navToRegister()">Register</button>
     </form>
   </div>
